@@ -1,5 +1,19 @@
 const apiURL = "https://pokeapi.co/api/v2";
 
+function processChain(chain, evolutionArray = []) {
+    evolutionArray.push(chain.species.name);
+
+    if (chain.evolves_to.length === 0) {
+        return evolutionArray;
+    }
+
+    for (const evolution of chain.evolves_to) {
+        processChain(evolution, evolutionArray);
+    }
+
+    return evolutionArray;
+}
+
 async function getPokemon(name) {
     try {
         const pokemonResponse = await fetch(`${apiURL}/pokemon/${name.toLowerCase()}`);
@@ -11,8 +25,8 @@ async function getPokemon(name) {
         const pokemonData = await pokemonResponse.json();
 
         const pokemonTypes = []
-        for (const types of pokemonData.types) {
-            pokemonTypes.push(types.type.name);
+        for (const type of pokemonData.types) {
+            pokemonTypes.push(type.type.name);
         }
 
         const pokemonAbilities = []
@@ -24,6 +38,8 @@ async function getPokemon(name) {
         for (const stat of pokemonData.stats) {
             pokemonStats.push([stat.stat.name, stat.base_stat]);
         }
+
+        const image = pokemonData.sprites.other["official-artwork"].front_default ?? pokemonData.sprites.front_default;
 
         const speciesResponse = await fetch(pokemonData.species.url);
 
@@ -42,26 +58,27 @@ async function getPokemon(name) {
         }
 
         const pokemonEvolutionChain = await evolutionResponse.json();
-        const pokemonEvolvesTo=[]
-        for (const evolution of pokemonEvolutionChain.chain.evolves_to) {
-            pokemonEvolvesTo.push(evolution.species.name)
-        }
+
+        const pokemonEvolution = processChain(pokemonEvolutionChain.chain)
 
         console.log(`
-        Name:${pokemonData.name} | 
-        Number:${pokemonData.id} | 
-        Types:${pokemonTypes} | 
-        Height:${pokemonData.height} decimeters |
-        Weight:${pokemonData.weight} hectograms |
-        Image:${pokemonData.sprites.front_default} |
-        Abilities:${pokemonAbilities} |
-        Stats:${pokemonStats} |
-        Description:${pokemonDescription} |
-        Evolutions:${pokemonEvolvesTo}`);
+Name: ${pokemonData.name}
+Number: ${pokemonData.id}
+Types: ${pokemonTypes.join(", ")}
+Height: ${pokemonData.height / 10} meters
+Weight: ${pokemonData.weight / 10} kilograms
+Image: ${image}
+Abilities: ${pokemonAbilities.join(", ")}
+Stats: ${pokemonStats
+            .map(([name, value]) => `${name}: ${value}`)
+            .join(", ")}
+Description: ${pokemonDescription}
+Evolutions: ${pokemonEvolution.join(", ")}
+`.trim());
 
     } catch (error) {
         console.error(`Error getting Pokémon: ${error.message}`);
     }
 }
 
-getPokemon("pichu");
+getPokemon("charizard");
