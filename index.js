@@ -1,4 +1,6 @@
 const apiURL = "https://pokeapi.co/api/v2";
+const input = document.getElementById('pokemon-input');
+const button = document.getElementById('pokemon-button');
 
 function processChain(chain, evolutionArray = []) {
     evolutionArray.push(chain.species.name);
@@ -61,24 +63,62 @@ async function getPokemon(name) {
 
         const pokemonEvolution = processChain(pokemonEvolutionChain.chain)
 
-        console.log(`
-Name: ${pokemonData.name}
-Number: ${pokemonData.id}
-Types: ${pokemonTypes.join(", ")}
-Height: ${pokemonData.height / 10} meters
-Weight: ${pokemonData.weight / 10} kilograms
-Image: ${image}
-Abilities: ${pokemonAbilities.join(", ")}
-Stats: ${pokemonStats
-            .map(([name, value]) => `${name}: ${value}`)
-            .join(", ")}
-Description: ${pokemonDescription}
-Evolutions: ${pokemonEvolution.join(", ")}
-`.trim());
+        const pokemonObject = {
+            name: pokemonData.name,
+            number: pokemonData.id,
+            types: pokemonTypes,
+            height: pokemonData.height / 10,
+            weight: pokemonData.weight / 10,
+            imageUrl: image,
+            abilities: pokemonAbilities,
+            stats: pokemonStats,
+            description: pokemonDescription,
+            evolutions: pokemonEvolution
+        }
 
+        console.log(pokemonObject);
+
+        return pokemonObject;
     } catch (error) {
         console.error(`Error getting Pokémon: ${error.message}`);
     }
 }
 
-getPokemon("charizard");
+function showInformation(pokemon){
+    const name = document.getElementById('pokemon-name')
+    name.textContent = pokemon.name
+
+    const number = document.getElementById('pokemon-number')
+    number.textContent = pokemon.number
+
+    const types = document.getElementById('pokemon-types')
+    types.textContent = pokemon.types
+
+    const height = document.getElementById('pokemon-height')
+    height.textContent = pokemon.height
+
+    const weight = document.getElementById('pokemon-weight')
+    weight.textContent = pokemon.weight
+
+    const img = document.getElementById('pokemon-img')
+    img.src = pokemon.imageUrl
+
+    const abilities = document.getElementById('pokemon-abilities')
+    abilities.textContent = pokemon.abilities
+
+    const stats = document.getElementById('pokemon-stats')
+    stats.textContent = pokemon.stats
+
+    const description = document.getElementById('pokemon-description')
+    description.textContent = pokemon.description
+
+    const evolutions = document.getElementById('pokemon-evolutions')
+    evolutions.textContent = pokemon.evolutions.join(' ---> ')
+
+}
+
+button.addEventListener('click', async() => {
+    const pokemonName = input.value;
+    const pokemonInformation =  await getPokemon(pokemonName);
+    showInformation(pokemonInformation);
+});
