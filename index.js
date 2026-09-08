@@ -90,6 +90,12 @@ function renderTypes(typesElement, typesArray){
     }).join("");
 }
 
+function renderAbilities(abilitiesElement, abilitiesArray){
+    abilitiesElement.innerHTML = abilitiesArray.map(ability => (
+        `<span>${ability}</span>`
+    )).join("");
+}
+
 function showInformation(pokemon){
     const name = document.getElementById('pokemon-name')
     name.textContent = pokemon.name
@@ -97,7 +103,7 @@ function showInformation(pokemon){
     const number = document.getElementById('pokemon-number')
     number.textContent = pokemon.number
 
-    const types = document.getElementById('pokemon-types')
+    const types = document.getElementById('pokemonTypes')
     renderTypes(types, pokemon.types)
 
     const height = document.getElementById('pokemon-height')
@@ -110,7 +116,7 @@ function showInformation(pokemon){
     img.src = pokemon.imageUrl
 
     const abilities = document.getElementById('pokemon-abilities')
-    abilities.textContent = pokemon.abilities
+    renderAbilities(abilities,pokemon.abilities)
 
     const stats = document.getElementById('pokemon-stats')
     stats.textContent = pokemon.stats

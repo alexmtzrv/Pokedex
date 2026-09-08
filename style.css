@@ -131,7 +131,15 @@ body{
 .abilities-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
+}
+
+#pokemon-abilities{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
 }
 /***********************/
 
