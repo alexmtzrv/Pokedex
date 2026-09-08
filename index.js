@@ -84,6 +84,12 @@ async function getPokemon(name) {
     }
 }
 
+function renderTypes(typesElement, typesArray){
+    typesElement.innerHTML = typesArray.map(type => {
+        return `<span>${type}</span>`
+    }).join("");
+}
+
 function showInformation(pokemon){
     const name = document.getElementById('pokemon-name')
     name.textContent = pokemon.name
@@ -92,7 +98,7 @@ function showInformation(pokemon){
     number.textContent = pokemon.number
 
     const types = document.getElementById('pokemon-types')
-    types.textContent = pokemon.types
+    renderTypes(types, pokemon.types)
 
     const height = document.getElementById('pokemon-height')
     height.textContent = pokemon.height
