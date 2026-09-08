@@ -3,21 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Alex´s pokédex</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<input type="text" name="" id="pokemon-input" placeholder="Enter pokemon´s name">
-<button id="pokemon-button">Get em!</button>
-<h1>Pokemon Information</h1>
-<p id="pokemon-name"></p>
-<p id="pokemon-number"></p>
-<p id="pokemon-types"></p>
-<p id="pokemon-height"></p>
-<p id="pokemon-weight"></p>
-<img src="" alt="" id="pokemon-img">
-<p id="pokemon-abilities"></p>
-<p id="pokemon-stats"></p>
-<p id="pokemon-description"></p>
-<p id="pokemon-evolutions"></p>
+<nav class="nav-bar">
+    <div>Alex´s Pókedex</div>
+    <div><a href="#" target="_self">HOME</a> </div>
+</nav>
+<section id="search-section">
+    <form id="search-form">
+        <input type="text" name="" id="form-input" placeholder="Enter pokemon´s name">
+        <button id="form-button" type="submit">Get em!</button>
+    </form>
+</section>
+<section id="header-section">
+    <div class="pokemon-number-name">
+        <p id="pokemon-number"></p>
+        <p id="pokemon-name"></p>
+    </div>
+    <div class="pokemon-types">
+        <p id="pokemon-types"></p>
+    </div>
+</section>
+<section id="image-section">
+    <img src="" alt="" id="pokemon-img">
+</section>
+<section id="info-section">
+    <div class="description-container">
+        <p id="pokemon-description"></p>
+    </div>
+    <div class="measures-container">
+        <div class="height-container">
+            <p>Height</p>
+            <p id="pokemon-height"></p>
+            <p>meters</p>
+        </div>
+        <div class="weight-container">
+            <p>Weight</p>
+            <p id="pokemon-weight"></p>
+            <p>kilograms</p>
+        </div>
+    </div>
+    <div class="abilities-container">
+        <p>Abilities</p>
+        <p id="pokemon-abilities"></p>
+    </div>
+    <div class="stats-container">
+        <p>Stats</p>
+        <p id="pokemon-stats"></p>
+    </div>
+    <div class="evolution-chain-container">
+        <p>Evolution Chain</p>
+        <div class="chain-wrapper">
+            <p id="pokemon-evolutions"></p>
+        </div>
+    </div>
+</section>
+
 <script src="index.js"></script>
 </body>
 </html>

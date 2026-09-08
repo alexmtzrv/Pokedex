@@ -1,0 +1,148 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*border: var(--border-skeleton);*/
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: start;
+    align-items: start;
+    --border-skeleton: 1px solid black;
+    /*gap: 2rem;*/
+}
+
+ /*NAV BAR SECTION!*/
+/*----------------------------------------------*/
+.nav-bar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 30px;
+    border: var(--border-skeleton);
+}
+/*----------------------------------------------*/
+
+/*SEARCH BAR SECTION!*/
+/*----------------------------------------------*/
+#search-section{
+    width: 100%;
+    padding: 10px 20px;
+    border: var(--border-skeleton);
+}
+
+#search-form{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border: var(--border-skeleton);
+}
+
+#form-input{
+    flex: 1;
+    height: 30px;
+}
+
+#form-button{
+    height: 30px;
+    width: 80px;
+}
+
+/*----------------------------------------------*/
+
+/*HEADER SECTION!*/
+/*----------------------------------------------*/
+#header-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: var(--border-skeleton);
+    margin-top: 1rem;
+}
+
+.pokemon-number-name{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border: var(--border-skeleton);
+}
+
+.pokemon-types{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+    gap: 1rem;
+    border: var(--border-skeleton);
+}
+
+/*----------------------------------------------*/
+
+/*IMAGE SECTION!*/
+/*----------------------------------------------*/
+#image-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+    border: var(--border-skeleton);
+}
+/*----------------------------------------------*/
+
+/*INFO SECTION!*/
+/*----------------------------------------------*/
+#info-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px 20px;
+    border: var(--border-skeleton);
+}
+
+#info-section div{
+    border: var(--border-skeleton);
+}
+/***********************/
+.measures-container{
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+
+.measures-container div{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+/***********************/
+
+/***********************/
+.abilities-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+/***********************/
+
+/***********************/
+.stats-container {
+    display: flex;
+    flex-direction: column;
+}
+/***********************/
+
+
+
+
+/*----------------------------------------------*/

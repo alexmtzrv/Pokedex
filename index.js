@@ -1,6 +1,6 @@
 const apiURL = "https://pokeapi.co/api/v2";
-const input = document.getElementById('pokemon-input');
-const button = document.getElementById('pokemon-button');
+const input = document.getElementById('form-input');
+const form = document.getElementById('search-form');
 
 function processChain(chain, evolutionArray = []) {
     evolutionArray.push(chain.species.name);
@@ -117,7 +117,8 @@ function showInformation(pokemon){
 
 }
 
-button.addEventListener('click', async() => {
+form.addEventListener('submit', async(event) => {
+    event.preventDefault()
     const pokemonName = input.value;
     const pokemonInformation =  await getPokemon(pokemonName);
     showInformation(pokemonInformation);
