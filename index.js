@@ -2,15 +2,18 @@ const apiURL = "https://pokeapi.co/api/v2";
 const input = document.getElementById('form-input');
 const form = document.getElementById('search-form');
 
-function processChain(chain, evolutionArray = []) {
-    evolutionArray.push(chain.species.name);
+async function processChain(chain, evolutionArray = []) {
+    const evolutionResponse = await fetch(`${apiURL}/pokemon/${chain.species.name}`)
+    const evolutionData = await evolutionResponse.json()
+    const evolutionImg = evolutionData.sprites.other["official-artwork"].front_default ?? pokemonData.sprites.front_default
 
+    evolutionArray.push([chain.species.name,evolutionImg]);
     if (chain.evolves_to.length === 0) {
         return evolutionArray;
     }
 
     for (const evolution of chain.evolves_to) {
-        processChain(evolution, evolutionArray);
+        await processChain(evolution, evolutionArray);
     }
 
     return evolutionArray;
@@ -61,7 +64,7 @@ async function getPokemon(name) {
 
         const pokemonEvolutionChain = await evolutionResponse.json();
 
-        const pokemonEvolution = processChain(pokemonEvolutionChain.chain)
+        const pokemonEvolution = await processChain(pokemonEvolutionChain.chain)
 
         const pokemonObject = {
             name: pokemonData.name,
@@ -91,9 +94,25 @@ function renderTypes(typesElement, typesArray){
 }
 
 function renderAbilities(abilitiesElement, abilitiesArray){
-    abilitiesElement.innerHTML = abilitiesArray.map(ability => (
-        `<span>${ability}</span>`
-    )).join("");
+    abilitiesElement.innerHTML = abilitiesArray.map(ability => {
+        return `<span>${ability}</span>`
+    }).join("");
+}
+
+function renderStats(statsElement, statsArray){
+    statsElement.innerHTML = statsArray.map(stat => {
+        return `<div class="singular-stat">
+                    <span>${stat[0]}</span>
+                    <span>${stat[1]}</span>
+                </div>
+                <div class="stat-bar">${stat[1]}%</div>`
+    }).join("")
+}
+
+function renderEvolutions(evolutionsElement, evolutionsArray){
+    evolutionsElement.innerHTML = evolutionsArray.map(evolution => {
+        return `<span class="evolution-card">${evolution}</span>`
+    }).join("")
 }
 
 function showInformation(pokemon){
@@ -119,13 +138,13 @@ function showInformation(pokemon){
     renderAbilities(abilities,pokemon.abilities)
 
     const stats = document.getElementById('pokemon-stats')
-    stats.textContent = pokemon.stats
+    renderStats(stats,pokemon.stats)
 
     const description = document.getElementById('pokemon-description')
     description.textContent = pokemon.description
 
     const evolutions = document.getElementById('pokemon-evolutions')
-    evolutions.textContent = pokemon.evolutions.join(' ---> ')
+    renderEvolutions(evolutions,pokemon.evolutions)
 
 }
 
