@@ -114,12 +114,11 @@ function renderStats(statsElement, statsArray){
 }
 
 function renderEvolutions(evolutionsElement, evolutionsArray){
-    evolutionsElement.innerHTML = evolutionsArray.map(evolution => {
-        return `<div class="evolution-card">
-                    <div class="evolution-img" style="background-image: url(${evolution[1]})">
-                    </div>
-                    <span>${evolution[0]}</span>
-                </div>`
+    evolutionsElement.innerHTML = evolutionsArray.map(([name,image]) => {
+        return `<button class="evolution-card" data-evolution-name="${name}">
+                    <div class="evolution-img" style="background-image: url('${image}')"></div>
+                    <span>${name}</span>
+                </button>`
     }).join("")
 }
 
