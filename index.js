@@ -1,6 +1,7 @@
 const apiURL = "https://pokeapi.co/api/v2";
 const input = document.getElementById('form-input');
 const form = document.getElementById('search-form');
+const chainWrapper = document.getElementById('chainWrapper');
 
 async function processChain(chain, evolutionArray = []) {
     const evolutionResponse = await fetch(`${apiURL}/pokemon/${chain.species.name}`)
@@ -161,3 +162,15 @@ form.addEventListener('submit', async(event) => {
     const pokemonInformation =  await getPokemon(pokemonName);
     showInformation(pokemonInformation);
 });
+
+chainWrapper.addEventListener('click', async (event) => {
+    const card = event.target.closest(".evolution-card")
+    if (!card) {
+        return
+    }
+
+    const pokemonName = card.getAttribute('data-evolution-name')
+
+    const pokemonInformation =  await getPokemon(pokemonName);
+    showInformation(pokemonInformation);
+})

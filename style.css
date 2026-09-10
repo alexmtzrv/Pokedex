@@ -181,6 +181,7 @@ body{
     flex-direction: row;
     align-items: center;
     overflow: scroll;
+    gap: 1.5rem;
 }
 
 .evolution-card{
