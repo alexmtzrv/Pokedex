@@ -100,13 +100,15 @@ function renderAbilities(abilitiesElement, abilitiesArray){
 }
 
 function renderStats(statsElement, statsArray){
-    statsElement.innerHTML = statsArray.map(stat => {
+    statsElement.innerHTML = statsArray.map(([name,value]) => {
+        const percentage = (value / 255) * 100;
+        const barWidth = Math.max(12, percentage);
         return `<div class="singular-stat">
                     <div class="stat-name">
-                        <span>${stat[0]}</span>
-                        <span>${stat[1]}</span>
+                        <span>${name}</span>
+                        <span>${value}</span>
                     </div>
-                    <div class="stat-bar" style="--bar-width: ${stat[1]}%">${stat[1]}%</div>
+                    <div class="stat-bar" style="--bar-width: ${barWidth}%">${value}%</div>
                 </div>`
     }).join("")
 }
