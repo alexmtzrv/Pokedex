@@ -102,17 +102,20 @@ function renderAbilities(abilitiesElement, abilitiesArray){
 function renderStats(statsElement, statsArray){
     statsElement.innerHTML = statsArray.map(stat => {
         return `<div class="singular-stat">
-                    <span>${stat[0]}</span>
-                    <span>${stat[1]}</span>
-                </div>
-                <div class="stat-bar">${stat[1]}%</div>`
+                    <div class="stat-name">
+                        <span>${stat[0]}</span>
+                        <span>${stat[1]}</span>
+                    </div>
+                    <div class="stat-bar" style="--bar-width: ${stat[1]}%">${stat[1]}%</div>
+                </div>`
     }).join("")
 }
 
 function renderEvolutions(evolutionsElement, evolutionsArray){
     evolutionsElement.innerHTML = evolutionsArray.map(evolution => {
-        return `<div>
-                    <img src="${evolution[1]}" alt="" id="pokemon-img">
+        return `<div class="evolution-card">
+                    <div class="evolution-img" style="background-image: url(${evolution[1]})">
+                    </div>
                     <span>${evolution[0]}</span>
                 </div>`
     }).join("")
@@ -140,13 +143,13 @@ function showInformation(pokemon){
     const abilities = document.getElementById('pokemon-abilities')
     renderAbilities(abilities,pokemon.abilities)
 
-    const stats = document.getElementById('pokemon-stats')
+    const stats = document.getElementById('pokemonStats')
     renderStats(stats,pokemon.stats)
 
     const description = document.getElementById('pokemon-description')
     description.textContent = pokemon.description
 
-    const evolutions = document.getElementById('chain-wrapper')
+    const evolutions = document.getElementById('chainWrapper')
     renderEvolutions(evolutions,pokemon.evolutions)
 
 }

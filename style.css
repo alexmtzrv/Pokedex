@@ -13,6 +13,7 @@ body{
     justify-content: start;
     align-items: start;
     --border-skeleton: 1px solid black;
+    --bar-width: 0%
     /*gap: 2rem;*/
 }
 
@@ -103,6 +104,7 @@ body{
 /*INFO SECTION!*/
 /*----------------------------------------------*/
 #info-section{
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -147,6 +149,55 @@ body{
 .stats-container {
     display: flex;
     flex-direction: column;
+}
+
+.pokemon-stats{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.singular-stat{
+   display: flex;
+    flex-direction: column;
+}
+
+.stat-bar{
+    width: var(--bar-width);
+}
+/***********************/
+
+/***********************/
+.evolution-chain-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+
+.chain-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: scroll;
+}
+
+.evolution-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.evolution-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: var(--border-skeleton);
+    aspect-ratio: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 /***********************/
 
