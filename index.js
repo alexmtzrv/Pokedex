@@ -111,7 +111,10 @@ function renderStats(statsElement, statsArray){
 
 function renderEvolutions(evolutionsElement, evolutionsArray){
     evolutionsElement.innerHTML = evolutionsArray.map(evolution => {
-        return `<span class="evolution-card">${evolution}</span>`
+        return `<div>
+                    <img src="${evolution[1]}" alt="" id="pokemon-img">
+                    <span>${evolution[0]}</span>
+                </div>`
     }).join("")
 }
 
@@ -143,7 +146,7 @@ function showInformation(pokemon){
     const description = document.getElementById('pokemon-description')
     description.textContent = pokemon.description
 
-    const evolutions = document.getElementById('pokemon-evolutions')
+    const evolutions = document.getElementById('chain-wrapper')
     renderEvolutions(evolutions,pokemon.evolutions)
 
 }
