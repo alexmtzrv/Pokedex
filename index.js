@@ -88,6 +88,11 @@ async function getPokemon(name) {
     }
 }
 
+function getRandomNumber(max){
+    console.log(Math.floor(Math.random()*max))
+    return Math.floor(Math.random()*max)
+}
+
 function renderTypes(typesElement, typesArray){
     typesElement.innerHTML = typesArray.map(type => {
         return `<span>${type}</span>`
@@ -155,6 +160,12 @@ function showInformation(pokemon){
     renderEvolutions(evolutions,pokemon.evolutions)
 
 }
+
+document.addEventListener('DOMContentLoaded', async() => {
+    const randomPokemon = String(getRandomNumber(100))
+    const pokemonInformation = await getPokemon(randomPokemon)
+    showInformation(pokemonInformation)
+})
 
 form.addEventListener('submit', async(event) => {
     event.preventDefault()
