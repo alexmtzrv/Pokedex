@@ -166,7 +166,7 @@ function showInformation(pokemon){
 }
 
 document.addEventListener('DOMContentLoaded', async() => {
-    const randomPokemon = String(getRandomNumber(100))
+    const randomPokemon = String(getRandomNumber(1025))
     showInformation(await fetchPokemonData(randomPokemon))
 })
 
