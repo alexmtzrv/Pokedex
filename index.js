@@ -128,6 +128,10 @@ function renderEvolutions(evolutionsElement, evolutionsArray){
     }).join("")
 }
 
+async function fetchPokemonData (pokemonID){
+    return await getPokemon(pokemonID);
+}
+
 function showInformation(pokemon){
     const name = document.getElementById('pokemon-name')
     name.textContent = pokemon.name
@@ -163,15 +167,13 @@ function showInformation(pokemon){
 
 document.addEventListener('DOMContentLoaded', async() => {
     const randomPokemon = String(getRandomNumber(100))
-    const pokemonInformation = await getPokemon(randomPokemon)
-    showInformation(pokemonInformation)
+    showInformation(await fetchPokemonData(randomPokemon))
 })
 
 form.addEventListener('submit', async(event) => {
     event.preventDefault()
-    const pokemonName = input.value;
-    const pokemonInformation =  await getPokemon(pokemonName);
-    showInformation(pokemonInformation);
+    const pokemonName = input.value
+    showInformation(await fetchPokemonData(pokemonName))
 });
 
 chainWrapper.addEventListener('click', async (event) => {
@@ -182,6 +184,5 @@ chainWrapper.addEventListener('click', async (event) => {
 
     const pokemonName = card.getAttribute('data-evolution-name')
 
-    const pokemonInformation =  await getPokemon(pokemonName);
-    showInformation(pokemonInformation);
+    showInformation(await fetchPokemonData(pokemonName))
 })
